@@ -1,32 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Event } from './event.entity';
-import { v4 as uuid } from 'uuid';
+import { CreateEventDto } from './dto/create-event.dto';
 
 @Injectable()
 export class EventsService {
-  private events: Event[] = [];
+  private events: Array<CreateEventDto> = [];
 
-  getAll() {
+  addEvent(createEventDto: CreateEventDto): CreateEventDto {
+    this.events.push(createEventDto);
+    return createEventDto;
+  }
+
+  findEventsByMonth(year: number, month: number): Array<CreateEventDto> {
+    return this.events.filter(
+      (event) =>
+        new Date(event.date).getFullYear() === year &&
+        new Date(event.date).getMonth() === month - 1,
+    );
+  }
+
+  getEvents(): Array<CreateEventDto> {
     return this.events;
-  }
-
-  create(event: Event) {
-    event.id = uuid();
-    this.events.push(event);
-    return event;
-  }
-
-  update(id: string, event: Event) {
-    const eventIndex = this.events.findIndex(e => e.id === id);
-    if (eventIndex !== -1) {
-      this.events[eventIndex] = { ...this.events[eventIndex], ...event };
-      return this.events[eventIndex];
-    }
-    return null;
-  }
-
-  delete(id: string) {
-    this.events = this.events.filter(e => e.id !== id);
-    return { deleted: true };
   }
 }

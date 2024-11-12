@@ -1,34 +1,45 @@
+// pages/home.js (or wherever you want SSR data)
+
 import React, { useState } from 'react';
 import Calendar from '../components/Calendar';
 import EventForm from '../components/EventForm';
-import '../components/Home.css'; // Ensure Home.css is in the correct path
+import '../components/Home.css';
 
-export default function Home() {
+export default function Home({ serverData }) {
   const [showForm, setShowForm] = useState(false);
 
   const handleCreateClick = () => {
-    setShowForm(true); // Show the EventForm when Create is clicked
+    setShowForm(true);
   };
 
   const handleDiscardClick = () => {
-    setShowForm(false); // Hide the EventForm when Discard is clicked
+    setShowForm(false);
   };
 
   return (
     <div className="container">
       <div className="header">
-      
         <h2 className="title">Calendarium.io</h2>
+        <p>{serverData}</p> {/* Display SSR data */}
       </div>
 
-      {/* Conditionally render EventForm if showForm is true */}
       {showForm && (
         <div className="event-form-container">
-          <EventForm onSubmit={() => {}} onDiscard={handleDiscardClick} /> {/* Pass onDiscard prop */}
+          <EventForm onSubmit={() => {}} onDiscard={handleDiscardClick} />
         </div>
       )}
 
       <Calendar />
     </div>
   );
+}
+
+// Server-side logic in getServerSideProps
+export async function getServerSideProps() {
+  // Here you can fetch data from APIs, databases, etc.
+  const serverData = 'This is data fetched from the server'; // Example data
+
+  return {
+    props: { serverData }, // The props will be passed to the component
+  };
 }

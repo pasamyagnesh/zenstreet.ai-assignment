@@ -137,3 +137,34 @@ body {
 .create-button:hover {
   background-color: #3b3c3c; /* Change background on hover */
 }
+.calendar-cell {
+  position: relative;
+  min-height: 27px;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-number {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.event-indicators {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.event-indicator {
+  background-color: #242424;
+  border: 1px solid #363736;
+  height: 4px;
+  margin: 0 5px;
+  border-radius: 2px;
+}
+
+.event-indicator:hover {
+  background-color: #333;
+}

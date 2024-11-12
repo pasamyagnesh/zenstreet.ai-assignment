@@ -1,29 +1,30 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, HttpStatus, Res } from '@nestjs/common';
 import { EventsService } from './events.service';
-import { Event } from './event.entity';
+import { CreateEventDto } from './dto/create-event.dto';
+import { Response } from 'express';
 
 @Controller('events')
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
-  @Get()
-  getAllEvents() {
-    return this.eventsService.getAll();
-  }
-
   @Post()
-  createEvent(@Body() event: Event) {
-    return this.eventsService.create(event);
+  async addEvent(@Body() createEventDto: CreateEventDto, @Res() res: Response) {
+    const event = this.eventsService.addEvent(createEventDto);
+    return res.status(HttpStatus.CREATED).json({
+      message: 'Event added successfully',
+      event,
+    });
   }
 
-  @Put(':id')
-  updateEvent(@Param('id') id: string, @Body() event: Event) {
-    return this.eventsService.update(id, event);
+  @Get('month')
+  async getMonthEvents(@Query('month') month: number, @Query('year') year: number, @Res() res: Response) {
+    const events = await this.eventsService.findEventsByMonth(year, month);
+    return res.status(HttpStatus.OK).json(events);
   }
 
-  @Delete(':id')
-  deleteEvent(@Param('id') id: string) {
-    return this.eventsService.delete(id);
+  @Get()
+  async getEvents(@Res() res: Response) {
+    const events = this.eventsService.getEvents();
+    return res.status(HttpStatus.OK).json(events);
   }
 }
-``
