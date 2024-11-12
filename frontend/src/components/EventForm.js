@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './EventForm.css';
 
 const EventForm = ({ onSubmit, initialData = {} }) => {
   const [title, setTitle] = useState(initialData.title || '');
@@ -12,13 +13,36 @@ const EventForm = ({ onSubmit, initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Event Title" required />
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-      <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required />
-      <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required />
-      <button type="submit">Save Event</button>
-    </form>
+    <div className="event-form">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Event Title"
+          required
+        />
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+        />
+        <input
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          required
+        />
+        <input
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          required
+        />
+        <button type="submit">Save Event</button>
+      </form>
+    </div>
   );
 };
 

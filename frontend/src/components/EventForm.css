@@ -1,0 +1,56 @@
+/* EventForm.css */
+.event-form {
+    background: #1e1f20;
+    color: #7b7e7d;
+    width: 400px;
+    height: 80px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .event-form input {
+    background-color: #333537;
+    color: #7b7e7d;
+    border: 1px solid #444848;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .event-form button {
+    background-color: #558eb2;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .event-form button:hover {
+    background-color: #004a77;
+  }
+  
+  /* Additional Styling for Discard Button */
+  .discard-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4e4e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .discard-button:hover {
+    background-color: #d43d3d;
+  }
+  
