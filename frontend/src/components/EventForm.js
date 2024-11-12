@@ -1,7 +1,8 @@
+// EventForm.js
 import React, { useState } from 'react';
 import './EventForm.css';
 
-const EventForm = ({ onSubmit, initialData = {} }) => {
+const EventForm = ({ onSubmit, onDiscard, initialData = {} }) => {
   const [title, setTitle] = useState(initialData.title || '');
   const [date, setDate] = useState(initialData.date || '');
   const [startTime, setStartTime] = useState(initialData.startTime || '');
@@ -41,6 +42,7 @@ const EventForm = ({ onSubmit, initialData = {} }) => {
           required
         />
         <button type="submit">Save Event</button>
+        <button type="button" onClick={onDiscard}>Discard</button> {/* Discard button */}
       </form>
     </div>
   );

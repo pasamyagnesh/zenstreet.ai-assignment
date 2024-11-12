@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from '../components/Calendar';
 import EventForm from '../components/EventForm';
-import '../components/Home.css'; // Correct path to Home.css
+import '../components/Home.css'; // Ensure Home.css is in the correct path
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
@@ -17,20 +17,14 @@ export default function Home() {
   return (
     <div className="container">
       <div className="header">
-        {/* Create Button */}
-        <button className="create-button" onClick={handleCreateClick}>
-          Create
-        </button>
-
-        {/* Calendar Title */}
+      
         <h2 className="title">Calendarium.io</h2>
       </div>
 
       {/* Conditionally render EventForm if showForm is true */}
       {showForm && (
         <div className="event-form-container">
-          <EventForm onSubmit={() => {}} /> {/* Pass an empty function or handle the form submission here */}
-          <button onClick={handleDiscardClick}>Discard</button>
+          <EventForm onSubmit={() => {}} onDiscard={handleDiscardClick} /> {/* Pass onDiscard prop */}
         </div>
       )}
 

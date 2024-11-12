@@ -1,8 +1,4 @@
-/* Apply the Poppins font globally */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-body {
-  font-family: 'Poppins', sans-serif;
-}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -15,7 +11,7 @@ body {
   margin: 0;
 }
 
-/* Center the calendar within the container */
+/* Container and Title */
 .container {
   display: flex;
   flex-direction: column;
@@ -25,22 +21,24 @@ body {
 
 .title {
   font-size: 2.5em;
+  font-weight: 600;
   margin-bottom: 20px;
   text-align: center;
   color: #ffffff;
 }
 
-/* Calendar styling */
+/* Calendar Styling */
 .calendar {
   background-color: #131314;
   border: 2px solid #1e1e1f;
   border-radius: 8px;
-  width:1200px;
+  width: 1200px;
   height: 550px;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
 .calendar-header {
@@ -64,61 +62,78 @@ body {
   padding: 20px;
   text-align: center;
   border: 1px solid #1e1e1f;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* Highlight today’s date */
+.calendar-cell.day:hover {
+  background-color: #333;
+}
+
+/* Highlight today's date */
 .today {
-  background-color: #007bff;
   color: #ffffff;
   font-weight: bold;
   border-radius: 50%;
 }
-/* Container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
 
-/* Header for title and button */
-.header {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-/* Create button styling */
-.create-button {
-  font-family: 'Poppins', sans-serif;
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.766);
-  width: 125px;
-  height: 45px;
-  border-radius: 50px;
-  border: 0.2px solid #363736; /* White border */
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  margin-right: 15px;
+/* Popup Overlay and Content */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #1b1b1b;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.close-button {
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.close-button:hover {
+  background-color: #444;
+}
+
+/* Importing Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.create-button {
+  padding: 12px 24px; /* Increased padding for larger button */
+  background-color: #242424 !important; /* Background color */
+  color: white !important;
+  border: 1px solid #3b3c3c !important; /* Border color */
+  cursor: pointer;
+  border-radius: 50px;
+  width: 100px; /* Increased width */
+  height: 40px; /* Increased height */
+  font-family: 'Poppins', sans-serif; /* Set font family to Poppins */
+  font-weight: 600; /* Optional: Adjust font weight */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  appearance: none; /* Remove default styling */
+  outline: none; /* Remove default blue outline */
 }
 
 .create-button:hover {
-  background-color: #333; /* Slightly lighter shade for hover effect */
-  border: 0.5px solid #363736; /* Change the border color on hover */
-  color: rgb(255, 255, 255);
-
-}
-
-
-/* Title styling */
-.title {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin: 0;
+  background-color: #3b3c3c; /* Change background on hover */
 }
