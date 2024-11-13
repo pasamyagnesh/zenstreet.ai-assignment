@@ -50,11 +50,12 @@ body {
   font-size: 1.5em;
   color: #ffffff;
 }
+
 .calendar-cell.header {
-  background-color: #1b1b1b; /* Set the background color of the header row */
-  color: #c5d1d6; /* Set the text color to #c5d1d6 */
-  text-align: center; /* Center align the text */
-  padding-top:5px; /* Optional: Add padding for spacing */
+  background-color: #1b1b1b;
+  color: #c5d1d6;
+  text-align: center;
+  padding-top: 5px;
   border: 0.01px solid rgba(255, 255, 255, 0.168);
 }
 
@@ -78,7 +79,6 @@ body {
   background-color: #333;
 }
 
-/* Highlight today's date */
 .today {
   color: #ffffff;
   font-weight: bold;
@@ -172,7 +172,7 @@ button[type="button"]:hover {
   background-color: #444;
 }
 
-/* Button styling */
+/* Create Button Styling */
 .create-button {
   padding: 12px 24px;
   background-color: #242424 !important;
@@ -193,6 +193,7 @@ button[type="button"]:hover {
   background-color: #3b3c3c;
 }
 
+/* Calendar Cell Styling */
 .calendar-cell {
   position: relative;
   min-height: 35px;
@@ -224,12 +225,31 @@ button[type="button"]:hover {
 .event-indicator:hover {
   background-color: #333;
 }
+
 .event-title {
   font-size: 0.8em;
   margin-top: 4px;
-  background-color: #004a77; /* Task background color */
-  color: #b7def7; /* Task text color */
-  padding: 2px 4px; /* Add some padding for better readability */
-  border-radius: 4px; /* Optional: rounded corners */
-  display: inline-block; /* Ensure background color wraps around text */
+  background-color: #004a77;
+  color: #b7def7;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.search-input {
+  width: 30%;  /* Set width to 30% */
+  height: 10px;  /* Set height to 8px */
+  padding: 1px;  /* Set inner padding to 1px */
+  font-size: 2px;  /* Set font size to 2px */
+  background-color: #242424;  /* Background color */
+  border: 1px solid #363736;  /* Border color */
+  color: #ffffff;  /* Text color */
+  border-radius: 4px;  /* Rounded corners */
+  outline: none;  /* Remove outline */
+}
+
+.search-input::placeholder {
+  font-size: 18px;  /* Set placeholder font size to 1px */
+  color: #8c8c8c;  /* Optional: Placeholder text color */
+  text-align: center;
+  padding: 5px 5px;
 }

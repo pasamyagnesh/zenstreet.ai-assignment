@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:3001';
 
 const sampleEvents = [
   {
-    title: 'Meeting with Team',
+    title: 'Meeting with Team - Strategy meeting',
     date: '2024-11-23',
     startTime: '10:00 AM',
     endTime: '11:00 AM'
@@ -18,6 +18,7 @@ const sampleEvents = [
     startTime: '2:00 PM',
     endTime: '3:00 PM'
   },
+
   {
     title: 'Client Presentation',
     date: '2024-11-05',
@@ -32,6 +33,8 @@ const Calendar = () => {
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [events, setEvents] = useState([]);
+  const [selectedDayEvents, setSelectedDayEvents] = useState([]); // Store events for the selected day
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
   // Colors for the tasks
   const colors = ['#fbbc04', '#4285f4', '#f72a25'];
@@ -103,13 +106,18 @@ const Calendar = () => {
   const handleDayClick = (day) => {
     if (day) {
       setSelectedDay(day);
+      const selectedDateString = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).toISOString().split('T')[0];
+      const eventsForSelectedDay = events.filter(event => event.date === selectedDateString);
+      setSelectedDayEvents(eventsForSelectedDay);  // Save events for the selected day
       setShowPopup(true);
     }
   };
+  
 
   const handleClosePopup = () => {
     setShowPopup(false);
     setSelectedDay(null);
+    setSelectedDayEvents([]); // Clear events when closing popup
   };
 
   const handleCreateEvent = () => {
@@ -120,6 +128,14 @@ const Calendar = () => {
   const handleEventDiscard = () => {
     setShowEventForm(false);
   };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredEvents = events.filter(event =>
+    event.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const daysArray = generateCalendar();
 
@@ -146,6 +162,17 @@ const Calendar = () => {
           <button onClick={handlePrevMonth}>&lt;</button>
           <span>{currentDate.toLocaleDateString('default', { month: 'long', year: 'numeric' })}</span>
           <button onClick={handleNextMonth}>&gt;</button>
+
+
+          {/* Search Input */}
+          <input
+            type="text"
+            className="search-input"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search events..."
+          />
+
           <button className="create-button" onClick={handleCreateEvent}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M5 12h14"></path>
@@ -154,40 +181,38 @@ const Calendar = () => {
         </div>
 
         <div className="calendar-grid">
-  {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
-    <div key={day} className="calendar-cell header">
-      {day}
-    </div>
-  ))}
+          {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
+            <div key={day} className="calendar-cell header">
+              {day}
+            </div>
+          ))}
 
-  {daysArray.map((day, index) => {
-    const dayEvents = getEventsForDay(day);
-    return (
-      <div
-        key={index}
-        className={`calendar-cell day ${day ? 'filled' : 'empty'}`}
-        onClick={() => handleDayClick(day)}
-      >
-        <div className="day-number">{day || ''}</div>
-        {dayEvents.length > 0 && (
-          <div className="event-indicators">
-            {dayEvents.map((event, idx) => (
+          {daysArray.map((day, index) => {
+            const dayEvents = getEventsForDay(day);
+            return (
               <div
-                key={idx}
-                className="event-title"
-                title={event.title}
-                style={{ backgroundColor: event.backgroundColor }}
+                key={index}
+                className={`calendar-cell day ${day ? 'filled' : 'empty'}`}
+                onClick={() => handleDayClick(day)}
               >
-                {event.title.substring(0, 15)}
+                <div className="day-number">{day || ''}</div>
+                {dayEvents.length > 0 && (
+                  <div className="event-indicators">
+                    {dayEvents.map((event, idx) => (
+                      <div
+                        key={idx}
+                        className="event-title"
+                        title={event.title}
+                        style={{ backgroundColor: event.backgroundColor }}
+                      >
+                        {event.title.substring(0, 15)+"..."}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  })}
-
-
+            );
+          })}
         </div>
       </div>
 
@@ -198,6 +223,18 @@ const Calendar = () => {
             <h3>Event Details</h3>
             <p>Date Selected: {currentDate.toLocaleDateString('default', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             <p>Selected Day: {selectedDay}</p>
+            <div>
+              {selectedDayEvents.length > 0 ? (
+                selectedDayEvents.map((event, index) => (
+                  <div key={index} style={{ backgroundColor: event.backgroundColor }}>
+                    <h4>{event.title}</h4>
+                    <p>{event.startTime} - {event.endTime}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No events for this day.</p>
+              )}
+            </div>
             <button className="create-button" onClick={handleCreateEvent}>Create</button>
             <button className="close-button" onClick={handleClosePopup}>Close</button>
           </div>
