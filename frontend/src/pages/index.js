@@ -34,12 +34,12 @@ export default function Home({ serverData }) {
   );
 }
 
-// Server-side logic in getServerSideProps
-export async function getServerSideProps() {
-  // Here you can fetch data from APIs, databases, etc.
-  const serverData = 'This is data fetched from the server'; // Example data
+// // Server-side logic in getServerSideProps
+// export async function getServerSideProps() {
+//   // Here you can fetch data from APIs, databases, etc.
+//   const serverData = 'This is data fetched from the server'; // Example data
 
-  return {
-    props: { serverData }, // The props will be passed to the component
-  };
-}
+//   return {
+//     props: { serverData }, // The props will be passed to the component
+//   };
+// }

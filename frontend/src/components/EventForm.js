@@ -1,6 +1,7 @@
 // EventForm.js
 import React, { useState } from 'react';
 import './EventForm.css';
+import './Calendar.css';
 
 const EventForm = ({ onSubmit, onDiscard, initialData = {} }) => {
   const [title, setTitle] = useState(initialData.title || '');

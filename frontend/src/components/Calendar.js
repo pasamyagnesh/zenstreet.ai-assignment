@@ -3,7 +3,28 @@ import EventForm from './EventForm';
 import './Calendar.css';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001'; // Change to match your backend portconsole.log(API_URL);  // Make sure it points to the correct base URL
+const API_URL = 'http://localhost:3001';
+
+const sampleEvents = [
+  {
+    title: 'Meeting with Team',
+    date: '2024-11-23',
+    startTime: '10:00 AM',
+    endTime: '11:00 AM'
+  },
+  {
+    title: 'Project Review',
+    date: '2024-11-14',
+    startTime: '2:00 PM',
+    endTime: '3:00 PM'
+  },
+  {
+    title: 'Client Presentation',
+    date: '2024-11-05',
+    startTime: '1:00 PM',
+    endTime: '2:30 PM'
+  }
+];
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -11,6 +32,9 @@ const Calendar = () => {
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [events, setEvents] = useState([]);
+
+  // Colors for the tasks
+  const colors = ['#fbbc04', '#4285f4', '#f72a25'];
 
   // Fetch events for the current month
   useEffect(() => {
@@ -21,31 +45,32 @@ const Calendar = () => {
     try {
       const response = await axios.get(`${API_URL}/events/month`, {
         params: {
-          month: currentDate.getMonth() + 1, // Months are 0-indexed
+          month: currentDate.getMonth() + 1,
           year: currentDate.getFullYear(),
         },
       });
       setEvents(response.data);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        console.error('No events found for this month');
-      } else {
-        console.error('Error fetching events:', error);
-      }
+      console.error('Error fetching events:', error);
+      setEvents(sampleEvents); // Fallback to sample events if API call fails
     }
   };
-  
+
   const handleEventSubmit = async (eventData) => {
+    // Randomly select a color for the event
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    const eventWithColor = { ...eventData, backgroundColor: randomColor };
+
     try {
-      await axios.post(`${API_URL}/events`, eventData);
+      await axios.post(`${API_URL}/events`, eventWithColor);
       setShowEventForm(false);
-      fetchMonthEvents(); // Refresh events after creating a new one
+      fetchMonthEvents();
     } catch (error) {
       console.error('Error creating event:', error);
     }
   };
 
-  // Function to get events for a specific day
   const getEventsForDay = (day) => {
     if (!day) return [];
     const dateString = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).toISOString().split('T')[0];
@@ -89,7 +114,7 @@ const Calendar = () => {
 
   const handleCreateEvent = () => {
     setShowEventForm(true);
-    setShowPopup(false); // Close the popup if it's open
+    setShowPopup(false);
   };
 
   const handleEventDiscard = () => {
@@ -122,7 +147,6 @@ const Calendar = () => {
           <span>{currentDate.toLocaleDateString('default', { month: 'long', year: 'numeric' })}</span>
           <button onClick={handleNextMonth}>&gt;</button>
           <button className="create-button" onClick={handleCreateEvent}>
-            {/* SVG plus icon */}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M5 12h14"></path>
             </svg>
@@ -130,31 +154,40 @@ const Calendar = () => {
         </div>
 
         <div className="calendar-grid">
-          {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
-            <div key={day} className="calendar-cell header">
-              {day}
-            </div>
-          ))}
+  {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
+    <div key={day} className="calendar-cell header">
+      {day}
+    </div>
+  ))}
 
-          {daysArray.map((day, index) => {
-            const dayEvents = getEventsForDay(day);
-            return (
+  {daysArray.map((day, index) => {
+    const dayEvents = getEventsForDay(day);
+    return (
+      <div
+        key={index}
+        className={`calendar-cell day ${day ? 'filled' : 'empty'}`}
+        onClick={() => handleDayClick(day)}
+      >
+        <div className="day-number">{day || ''}</div>
+        {dayEvents.length > 0 && (
+          <div className="event-indicators">
+            {dayEvents.map((event, idx) => (
               <div
-                key={index}
-                className={`calendar-cell day ${day ? 'filled' : 'empty'}`}
-                onClick={() => handleDayClick(day)}
+                key={idx}
+                className="event-title"
+                title={event.title}
+                style={{ backgroundColor: event.backgroundColor }}
               >
-                <div className="day-number">{day || ''}</div>
-                {dayEvents.length > 0 && (
-                  <div className="event-indicators">
-                    {dayEvents.map((event, idx) => (
-                      <div key={idx} className="event-indicator" title={event.title} />
-                    ))}
-                  </div>
-                )}
+                {event.title.substring(0, 15)}
               </div>
-            );
-          })}
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  })}
+
+
         </div>
       </div>
 
@@ -165,7 +198,7 @@ const Calendar = () => {
             <h3>Event Details</h3>
             <p>Date Selected: {currentDate.toLocaleDateString('default', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             <p>Selected Day: {selectedDay}</p>
-            <button className="create-button" onClick={handleCreateEvent}>Create Event</button>
+            <button className="create-button" onClick={handleCreateEvent}>Create</button>
             <button className="close-button" onClick={handleClosePopup}>Close</button>
           </div>
         </div>

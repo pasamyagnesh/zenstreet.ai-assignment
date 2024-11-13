@@ -33,7 +33,7 @@ body {
   border: 2px solid #1e1e1f;
   border-radius: 8px;
   width: 1200px;
-  height: 550px;
+  height: 650px;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,13 @@ body {
   font-size: 1.5em;
   color: #ffffff;
 }
+.calendar-cell.header {
+  background-color: #1b1b1b; /* Set the background color of the header row */
+  color: #c5d1d6; /* Set the text color to #c5d1d6 */
+  text-align: center; /* Center align the text */
+  padding-top:5px; /* Optional: Add padding for spacing */
+  border: 0.01px solid rgba(255, 255, 255, 0.168);
+}
 
 .calendar-grid {
   display: grid;
@@ -61,7 +68,8 @@ body {
 .calendar-cell {
   padding: 20px;
   text-align: center;
-  border: 1px solid #1e1e1f;
+  border: 2px solid #1e1e1f;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -101,6 +109,55 @@ body {
   text-align: center;
 }
 
+/* Event Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  padding: 10px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #242424;
+  border: 1px solid #363736;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+input[type="time"]::placeholder {
+  color: #8c8c8c;
+}
+
+button[type="submit"],
+button[type="button"] {
+  padding: 10px;
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #444;
+}
+
+/* Error Message */
+.error {
+  color: #ff6b6b;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* Close Button */
 .close-button {
   background-color: #333;
   color: #ffffff;
@@ -115,31 +172,30 @@ body {
   background-color: #444;
 }
 
-/* Importing Poppins font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
+/* Button styling */
 .create-button {
-  padding: 12px 24px; /* Increased padding for larger button */
-  background-color: #242424 !important; /* Background color */
+  padding: 12px 24px;
+  background-color: #242424 !important;
   color: white !important;
-  border: 1px solid #3b3c3c !important; /* Border color */
+  border: 1px solid #3b3c3c !important;
   cursor: pointer;
   border-radius: 50px;
-  width: 100px; /* Increased width */
-  height: 40px; /* Increased height */
-  font-family: 'Poppins', sans-serif; /* Set font family to Poppins */
-  font-weight: 600; /* Optional: Adjust font weight */
+  width: 100px;
+  height: 40px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
-  appearance: none; /* Remove default styling */
-  outline: none; /* Remove default blue outline */
+  appearance: none;
+  outline: none;
 }
 
 .create-button:hover {
-  background-color: #3b3c3c; /* Change background on hover */
+  background-color: #3b3c3c;
 }
+
 .calendar-cell {
   position: relative;
-  min-height: 27px;
+  min-height: 35px;
   display: flex;
   flex-direction: column;
 }
@@ -167,4 +223,13 @@ body {
 
 .event-indicator:hover {
   background-color: #333;
+}
+.event-title {
+  font-size: 0.8em;
+  margin-top: 4px;
+  background-color: #004a77; /* Task background color */
+  color: #b7def7; /* Task text color */
+  padding: 2px 4px; /* Add some padding for better readability */
+  border-radius: 4px; /* Optional: rounded corners */
+  display: inline-block; /* Ensure background color wraps around text */
 }

@@ -1,6 +1,22 @@
+/* General Event Form Styles */
 .event-form {
-  width: 100%;
-  max-width: 400px;
+  width: 200px;
+  height: 400px;
+  background-color: #1e1f20;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #363736;
+  color: #ffffff;
+}
+
+.event-form h2 {
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .event-form form {
@@ -9,75 +25,73 @@
   gap: 15px;
 }
 
-.event-form input {
-  padding: 12px;
-  border-radius: 8px;
+/* Input Styles */
+.event-form input, 
+.event-form textarea {
+  padding: 8px;
+  border-radius: 6px;
   border: 1px solid #363736;
   background-color: #242424;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
 }
 
-.event-form input::placeholder {
+.event-form input::placeholder, 
+.event-form textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.event-form input:focus {
+.event-form input:focus, 
+.event-form textarea:focus {
   outline: none;
   border-color: #4a4a4a;
 }
 
-.event-form button {
-  padding: 12px 24px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.2s ease;
+/* Button Container Styles */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
 }
 
+/* Save Button */
 .event-form button[type="submit"] {
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.766);
-  border: 0.2px solid #363736;
+  background-color: #a8c7fa;
+  color: #1e1f20;
+  border: none;
+  width: 48%;
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
 
 .event-form button[type="submit"]:hover {
-  background-color: #333;
-  color: #ffffff;
+  background-color: #8fb3e4;
 }
 
+/* Discard Button */
 .event-form button[type="button"] {
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.766);
-  border: 0.2px solid #363736;
+  background-color: #333537;
+  color: #ffffff;
+  border: none;
+  width: 48%;
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
 
 .event-form button[type="button"]:hover {
-  background-color: #333;
-  color: #ffffff;
+  background-color: #444647;
 }
 
-/* Event Form Popup Styles */
-.event-form-popup {
-  background-color: #1b1b1b;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid #363736;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-}
-
-.event-form-popup h2 {
-  color: #ffffff;
-  margin-bottom: 20px;
-  font-size: 24px;
-  text-align: center;
-}
-
-/* Updated Calendar styles for the popup overlay */
+/* Popup Overlay */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -92,9 +106,51 @@
   backdrop-filter: blur(5px);
 }
 
-.popup-content {
-  background-color: #1b1b1b;
+.event-form-popup {
+  background-color: #1e1f20;
   border: 1px solid #363736;
   padding: 30px;
   border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+/* Container for Save and Discard buttons */
+.button-container {
+  display: flex;
+  gap: 3px; /* Space between the buttons */
+  width: 100%;
+}
+
+/* Save Event Button Styling */
+.save-button {
+  flex: 1; /* Takes half of the container width */
+  padding: 10px;
+  background-color: #a8c7fa; /* Button color */
+  color: #4267a3; /* Button text color */
+  border: none;
+  border-radius: 5px; /* Border radius */
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.save-button:hover {
+  background-color: #90b9e8; /* Optional hover color */
+}
+
+/* Discard Button Styling */
+.discard-button {
+  flex: 1; /* Takes half of the container width */
+  padding: 10px;
+  background-color: #333; /* Dark background for discard */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px; /* Border radius */
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.discard-button:hover {
+  background-color: #444; /* Optional hover color */
 }
