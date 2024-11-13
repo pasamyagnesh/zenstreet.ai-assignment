@@ -1,26 +1,28 @@
 # Calendarium.io
 
-Still working on this app.
+Prototype:
+![Calendarium.io Screenshot](Images/calendar.io.png)
+Output:
+![Calendarium.io Screenshot](Images/Homepagee.png)
 
-![Calendarium.io Screenshot](images/calendar.io.png)
-# NextJS and NestJS Project
+# Calendarium.io - A Fullstack App Built with Next.js and NestJS
 
-This project is a full-stack web application built using NextJS for the frontend and NestJS for the backend.
+**Calendarium.io** is a full-stack web application built using **Next.js** for the frontend and **NestJS** for the backend. It provides a comprehensive calendar solution for managing events, appointments, and schedules.
 
 ## Project Setup
 
-To set up the project on your local machine, follow these steps:
+To run the project on your local machine, follow these steps:
 
-### Frontend (NextJS)
+### Frontend (Next.js)
 
 1. **Clone the repository**:
 ```
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/your-username/calendarium.git
 ```
 
 2. **Navigate to the frontend directory**:
 ```
-cd your-project/frontend
+cd calendarium/frontend
 ```
 
 3. **Install dependencies**:
@@ -33,13 +35,13 @@ npm install
 npm run dev
 ```
 
-This will start the NextJS development server and you can access the frontend at `http://localhost:3000`.
+This will start the Next.js development server and you can access the frontend at `http://localhost:3000`.
 
 ### Backend (NestJS)
 
 1. **Navigate to the backend directory**:
 ```
-cd your-project/backend
+cd calendarium/backend
 ```
 
 2. **Install dependencies**:
@@ -58,41 +60,41 @@ This will start the NestJS development server and you can access the backend API
 
 The project is organized as follows:
 
-<span style="color:green">**frontend**</span>
+<span style="color:blue">**frontend**</span>
 - <span style="color:blue">**pages**</span>
-  - <span style="color:purple">index.tsx</span>
-  - <span style="color:purple">about.tsx</span>
-  - <span style="color:purple">contact.tsx</span>
+  - <span style="color:blue">index.tsx</span>
+  - <span style="color:blue">calendar.tsx</span>
+  - <span style="color:blue">settings.tsx</span>
 - <span style="color:blue">**components**</span>
-  - <span style="color:purple">Header.tsx</span>
-  - <span style="color:purple">Footer.tsx</span>
-  - <span style="color:purple">ProductCard.tsx</span>
+  - <span style="color:blue">Calendar.tsx</span>
+  - <span style="color:blue">EventForm.tsx</span>
+  - <span style="color:blue">UserSettings.tsx</span>
 - <span style="color:blue">**styles**</span>
-  - <span style="color:purple">globals.css</span>
+  - <span style="color:blue">globals.css</span>
 - <span style="color:blue">**utils**</span>
-  - <span style="color:purple">api.ts</span>
+  - <span style="color:blue">api.ts</span>
 
-<span style="color:green">**backend**</span>
+<span style="color:blue">**backend**</span>
 - <span style="color:blue">**src**</span>
   - <span style="color:blue">**modules**</span>
-    - <span style="color:purple">users</span>
-    - <span style="color:purple">products</span>
+    - <span style="color:blue">events</span>
+    - <span style="color:blue">users</span>
   - <span style="color:blue">**controllers**</span>
-    - <span style="color:purple">UsersController.ts</span>
-    - <span style="color:purple">ProductsController.ts</span>
+    - <span style="color:blue">EventsController.ts</span>
+    - <span style="color:blue">UsersController.ts</span>
   - <span style="color:blue">**services**</span>
-    - <span style="color:purple">UsersService.ts</span>
-    - <span style="color:purple">ProductsService.ts</span>
+    - <span style="color:blue">EventsService.ts</span>
+    - <span style="color:blue">UsersService.ts</span>
   - <span style="color:blue">**entities**</span>
-    - <span style="color:purple">User.ts</span>
-    - <span style="color:purple">Product.ts</span>
+    - <span style="color:blue">Event.ts</span>
+    - <span style="color:blue">User.ts</span>
   - <span style="color:blue">**app.module.ts**</span>
   - <span style="color:blue">**main.ts**</span>
 
 ## Technologies Used
 
 - **Frontend**:
-  - [NextJS](https://nextjs.org/) - React framework for building server-rendered applications
+  - [Next.js](https://nextjs.org/) - React framework for building server-rendered applications
   - [Axios](https://axios-http.com/) - HTTP client for making API requests
   - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 
@@ -103,7 +105,9 @@ The project is organized as follows:
 ## Features
 
 - User authentication and authorization
-- CRUD operations for products
+- CRUD operations for events
+- Calendar view with day, week, and month modes
+- Shareable calendars and event invitations
 - Integration between frontend and backend
 
 ## Contributing
